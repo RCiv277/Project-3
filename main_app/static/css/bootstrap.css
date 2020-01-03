@@ -219,13 +219,14 @@ th {
 }
 
 label {
-  display: inline-block;
+  width: 100%;
   margin-bottom: 0.5rem;
+  margin-right: 2.0rem;
   color: rgb(109, 109, 109);
   font-weight: bold;
   background-color: rgba(10, 97, 254, 0.1);
   border-radius: 2px;
-}
+  }
 
 button {
   border-radius: 0;
@@ -392,11 +393,15 @@ h6, .h6 {
 }
 
 .rxlabel {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
   background: linear-gradient(90deg, rgba(235,235,235,1) 15%, rgba(255,255,255,1) 50%, rgba(235,235,235,1) 85%);
   border:  solid 4px rgba(191, 35, 0, 0.7);
   border-radius: 40px; 
   width: 60%;
-  height: 100%;
+  height: 60%;
   margin-top: 5%;
   padding: 150px;
   margin-right: auto;
@@ -405,10 +410,14 @@ h6, .h6 {
 
 #log-in {
   position: absolute;
-  top: 55%;
-  left: 40%;
+  top: 60%;
+  left: 35%;
   width: 50%;
-  margin: -100px 0 0 -100px;
+  margin: -90px 0 0 -100px;
+}
+
+#register {
+  margin: auto;
 }
 
 #inputEmail3 {
@@ -421,10 +430,30 @@ h6, .h6 {
   margin-left: 35px
 }
 
+
+#pCard {
+  border-radius: 75px;
+  box-shadow: 5px 10px 8px #c67701e5;
+  background: linear-gradient(180deg,rgb(255, 252, 201) 0%, rgba(230, 109, 0, 0.7) 80%);
+  
+}
+
+#apptCard {
+  border-radius: 75px;
+  box-shadow: 5px 10px 8px #c67701e5;
+  background: linear-gradient(180deg, rgb(255, 252, 201) 0%, rgba(230, 109, 0, 0.7) 50%, rgb(255, 252, 201));
+}
+
+#medCard {
+  border-radius: 75px;
+  box-shadow: 5px 10px 8px #c67701e5;
+  background: linear-gradient(180deg, rgb(255, 252, 201) 0%, rgba(230, 109, 0, 0.7) 80%);
+  }
+
 .tc-logo {
 color: #007bff;
-margin-top: -28%;
-margin-left: 20%; 
+margin-top: -35%;
+margin-left: 10%; 
 }
 
 .lead {
@@ -2076,17 +2105,19 @@ pre code {
   display: block;
   width: 100%;
   height: calc(1.5em + 0.75rem + 2px);
+  margin-left: 35px;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
+  background-color: rgba(252, 235, 0, 0.2);;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -4800,17 +4831,22 @@ input[type="button"].btn-block {
 .card-body {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
+  color: rgb(109, 109, 109);
   min-height: 1px;
   padding: 1.25rem;
 }
 
 .card-title {
+  border-bottom: 10px groove rgba(255, 89, 0, 0.3);
   margin-bottom: 0.75rem;
 }
+
+
 
 .card-subtitle {
   margin-top: -0.375rem;
   margin-bottom: 0;
+ 
 }
 
 .card-text:last-child {
@@ -4826,9 +4862,10 @@ input[type="button"].btn-block {
 }
 
 .card-header {
-  padding: 0.75rem 1.25rem;
+  padding: 0.90rem 1.25rem;
+  color: rgb(109, 109, 109);
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
+  margin-left: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
