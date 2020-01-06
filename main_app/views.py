@@ -60,13 +60,10 @@ class AppointmentsDelete(DeleteView):
 #   success_url = '/patients/create/'
 
     
-class PatientsUpdate(UpdateView):
+class PatientUpdate(UpdateView):
     model = Patient
     fields = '__all__'
 
-class PatientsDelete(DeleteView):
-    model = Patient
-    success_url = '/patients/'
 
 # signup views
 def signup(request):
@@ -84,9 +81,11 @@ def signup(request):
   context = {'form': form, 'error_message': error_message}
   print('hi')
   return render(request, 'registration/signup.html', context)
-
-def patient_delete(request, patients_name):
-    Patient.objects.filter(name=patients_name).delete()
+  
+  
+  
+def patient_delete(request, patient_name):
+    Patient.objects.filter(name=patient_name).delete()
     return redirect('index')
 
 def patients_create(request):

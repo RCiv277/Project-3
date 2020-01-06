@@ -20,6 +20,6 @@ urlpatterns = [
 
     # create,update, and delete paths for Patients
     path('patients/create/', views.patients_create, name='patients_create'),
-    path('patients/<int:pk>/update/', views.PatientsUpdate.as_view(), name='patients_update'),
+    path('patients/<str:patient_name>/update/', views.PatientUpdate.as_view(), name='patients_update'),
     path('patients/<str:patient_name>/delete/', views.patient_delete, name='patients_delete'),
 ]
