@@ -1,11 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .models import Pills, Appointments, Patient
-
+from .forms import PatientForm
 # Create your views here.
 
 
@@ -13,11 +13,6 @@ from .models import Pills, Appointments, Patient
 def home(request):
       return render(request, 'home.html')
 # Updated from login to login_user
-def login_user(request):
-  return render(request, 'login.html')
-def registration_signup(request):
-  return render(request, 'registration/signup.html')
-
 
 #   Patients index, and detail views
 def patients_index(request):
@@ -29,10 +24,12 @@ def patients_detail(request, patient_name):
     return render(request, 'patients/details.html', { 'patient': patient})
 
 # Pills create, update, and delete views
+
 class PillsCreate(CreateView):
-  model = Pills
-  fields = '__all__'
-  success_url = '/patients/'
+    model = Pills
+    fields = ['name', 'total', 'pil_days', 'dosage'] 
+    def form_valid(self, form):
+        return super().form_valid(form)
 
 class PillsUpdate(UpdateView):
     model = Pills
@@ -45,7 +42,7 @@ class PillsDelete(DeleteView):
 # Appointments create, update, and delete views
 class AppointmentsCreate(CreateView):
   model = Appointments
-  fields = '__all__'
+  fields = ['name', 'app_date', 'practioner', 'location', 'note']
   success_url = '/patients/'
 
 class AppointmentsUpdate(UpdateView):
@@ -62,19 +59,15 @@ class AppointmentsDelete(DeleteView):
 #   fields = '__all__'
 #   success_url = '/patients/create/'
 
-def patients_create(request):
-    return render(request, 'patients/create.html')
     
-class PatientsUpdate(UpdateView):
+class PatientUpdate(UpdateView):
     model = Patient
     fields = '__all__'
 
-class PatientsDelete(DeleteView):
-    model = Patient
-    success_url = '/patients/'
 
 # signup views
 def signup(request):
+  print('hi')
   error_message = ''
   if request.method == 'POST':
     form = UserCreationForm(request.POST)
@@ -86,4 +79,28 @@ def signup(request):
       error_message = 'Invalid sign up - try again'
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
+  print('hi')
   return render(request, 'registration/signup.html', context)
+  
+  
+  
+def patient_delete(request, patient_name):
+    Patient.objects.filter(name=patient_name).delete()
+    return redirect('index')
+
+def patients_create(request):
+    print(request.user)
+    if request.method == 'POST':
+        patient = Patient(user = request.user)
+        form = PatientForm(request.POST , instance=patient)
+        print(form)
+        if form.is_valid():
+            patient.save()
+            print('---------------------Form Validated')
+            return redirect('index')
+        else:
+            print('---------------------Form Denied')
+            return redirect('index')
+    elif request.method == 'GET':
+        return render(request, 'patients/create.html')
+

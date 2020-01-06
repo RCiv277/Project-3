@@ -1,19 +1,17 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
-
 
 urlpatterns = [
     # Basic Urls
     path('', views.home, name='home'),
-    path('login/', views.login_user, name='login_user'),
     path('patients/', views.patients_index, name='index'),
     path('patients/<str:patient_name>', views.patients_detail, name='detail'),
-    path('registration/', views.registration_signup, name='signup'),
-
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup', views.signup, name='signup'),
     # create,update, and delete paths for pills model
     path('pills/create/', views.PillsCreate.as_view(), name='pills_create'),
-    path('pills/<int:pk>/update/', views.PillsUpdate.as_view(), name='pills_update'),
-    path('pills/<int:pk>/delete/', views.PillsDelete.as_view(), name='pills_delete'),
+    path('pills/<str:patient_name>/update/', views.PillsUpdate.as_view(), name='pills_update'),
+    path('pills/<str:patient_name>/delete/', views.PillsDelete.as_view(), name='pills_delete'),
 
     # create,update, and delete paths for appointments
     path('appointments/create/', views.AppointmentsCreate.as_view(), name='appointments_create'),
@@ -22,6 +20,6 @@ urlpatterns = [
 
     # create,update, and delete paths for Patients
     path('patients/create/', views.patients_create, name='patients_create'),
-    path('patients/<int:pk>/update/', views.PatientsUpdate.as_view(), name='patients_update'),
-    path('patients/<int:pk>/delete/', views.PatientsDelete.as_view(), name='patients_delete'),
+    path('patients/<str:patient_name>/update/', views.PatientUpdate.as_view(), name='patients_update'),
+    path('patients/<str:patient_name>/delete/', views.patient_delete, name='patients_delete'),
 ]
