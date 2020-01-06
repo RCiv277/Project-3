@@ -42,7 +42,7 @@ class PillsDelete(DeleteView):
 # Appointments create, update, and delete views
 class AppointmentsCreate(CreateView):
   model = Appointments
-  fields = '__all__'
+  fields = ['name', 'app_date', 'practioner', 'location', 'note']
   success_url = '/patients/'
 
 class AppointmentsUpdate(UpdateView):
@@ -85,8 +85,9 @@ def signup(request):
   print('hi')
   return render(request, 'registration/signup.html', context)
 
-
-
+def patient_delete(request, patients_name):
+    Patient.objects.filter(name=patients_name).delete()
+    return redirect('index')
 
 def patients_create(request):
     print(request.user)
